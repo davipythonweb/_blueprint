@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
 
 user_bp = Blueprint('user', __name__, template_folder='templates')
 
@@ -13,6 +13,17 @@ def settings():
     return '''
     <h1>Pagina de Configurações do Usuario</h1>
     '''
+
+@user_bp.route('/dashboard')
+def dashboard():
+    name = "Davi - "
+    return render_template('dashboard.html', name = name)
+
+
+
+
+
+
 
 """
 Com o Blueprint, podemos organizar melhor as rotas relacionadas ao usuário em um módulo separado.
