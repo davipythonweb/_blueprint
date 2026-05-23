@@ -10,5 +10,6 @@ def root():
 # Registrar o blueprint do usuário
 app.register_blueprint(user_bp, url_prefix='/user')
 
+# rodar servidor
 if __name__ == '__main__':
     app.run(debug=True, port=5300)
