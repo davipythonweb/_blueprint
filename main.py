@@ -1,11 +1,15 @@
 from flask import Flask
+from dotenv import load_dotenv
+import os
 
 # importar blueprints
 from routes.user import user_bp
 from routes.auth import auth_bp
 
-
+load_dotenv()
 app = Flask(__name__)
+app.secret_key = os.getenv('app.secret_key')
+
 
 @app.route('/')
 def root():

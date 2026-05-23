@@ -1,4 +1,4 @@
-from flask import Blueprint, request, redirect, url_for
+from flask import Blueprint, request, redirect, url_for, session
 
 auth_bp = Blueprint('auth', __name__, template_folder='templates')
 
@@ -9,6 +9,8 @@ def login():
         password = request.form.get('pwd')
         # Aqui você pode adicionar a lógica de autenticação, como verificar o usuário e senha
         if username == 'admin' and password == 'teste':
+            session['username'] = username
+            session['token'] = '0000'  # Simulando um token de autenticação
             return redirect(url_for('user.dashboard'))
         return 'Login falhou. Tente novamente.'
 

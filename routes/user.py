@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, session, redirect, url_for
 
 user_bp = Blueprint('user', __name__, template_folder='templates')
 
@@ -16,10 +16,16 @@ def settings():
 
 @user_bp.route('/dashboard')
 def dashboard():
-    name = "Davi - "
-    return render_template('dashboard.html', name = name)
+    name = session.get('username')
+    return render_template('dashboard.html', name=name)
 
-
+@user_bp.before_request
+def check_authentication():
+    # verificar se existe o token
+    token = session.get('token')
+    if not token:
+        return redirect(url_for('auth.login'))
+    
 
 
 
