@@ -1,7 +1,9 @@
 from flask import Blueprint, render_template, session, redirect, url_for
 
+# Criar um Blueprint para as rotas relacionadas ao usuário
 user_bp = Blueprint('user', __name__, template_folder='templates')
 
+# rotas privadas para o usuário
 @user_bp.route('/')
 def root():
     return '''
@@ -19,6 +21,7 @@ def dashboard():
     name = session.get('username')
     return render_template('dashboard.html', name=name)
 
+# verificar se o usuário está autenticado antes de acessar as rotas do usuário
 @user_bp.before_request
 def check_authentication():
     # verificar se existe o token
