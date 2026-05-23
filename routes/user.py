@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session, redirect, url_for
+from flask import Blueprint, render_template, render_template_string, session, redirect, url_for
 
 # Criar um Blueprint para as rotas relacionadas ao usuário
 user_bp = Blueprint('user', __name__, template_folder='templates')
@@ -6,19 +6,21 @@ user_bp = Blueprint('user', __name__, template_folder='templates')
 # rotas privadas para o usuário
 @user_bp.route('/')
 def root():
-    return '''
+    return render_template_string('''
     <h1>Pagina do Usuario</h1>
-    '''
+    ''')
 
 # rota privada para a pagina de configurações do usuário
 @user_bp.route('/settings')
 def settings():
-    return '''
+    return  render_template_string('''
     <h1>Pagina de Configurações do Usuario</h1>
-    '''
+    ''')
+
 # rota privada para a pagina de dashboard do usuário
 @user_bp.route('/dashboard')
 def dashboard():
+    # obter o nome do usuário da sessão para exibir na página de dashboard
     name = session.get('username')
     return render_template('dashboard.html', name=name)
 

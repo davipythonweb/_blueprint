@@ -11,14 +11,18 @@ def login():
         password = request.form.get('pwd')
 
         if username == 'admin' and password == 'teste':
+            # definir o token e o nome do usuário na sessão
             session['username'] = username
+            # aqui estamos apenas simulando a geração de um token
             session['token'] = '0000'
 
+            # exibir uma mensagem de sucesso usando flash e redirecionar para a página de dashboard do usuário
             flash('Login realizado com sucesso.', 'success')
             return redirect(url_for('user.dashboard'))
 
         flash('Login falhou. Tente novamente.', 'danger')
 
+    # renderizar o formulário de login usando render_template_string para exibir as mensagens flash
     return render_template_string('''
     <div style="
         text-align: center;
@@ -68,23 +72,10 @@ def login():
 # fazer logout com flask message e redirect para a pagina de login
 @auth_bp.route('/logout')
 def logout():
+    # remover o token e o nome do usuário da sessão para efetuar o logout
     session.pop('username', None)
     session.pop('token', None)
 
     flash('Logout realizado com sucesso.', 'warning')
     return redirect(url_for('auth.login'))
-
-
-# esta menssagem nao apareceu na tela? porque? porque nao tem um template para exibir as mensagens flash, entao a mensagem é armazenada na sessão, mas não é exibida em nenhum lugar. Para exibir as mensagens flash, você precisa adicionar um código no seu template para renderizar as mensagens. Por exemplo, no seu template HTML, você pode adicionar o seguinte código para exibir as mensagens flash:
-"""
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    <ul>
-    {% for category, message in messages %}
-      <li class="{{ category }}">{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
-"""
 

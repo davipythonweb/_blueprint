@@ -28,7 +28,6 @@ def page_not_found(e):
     </div>
     ''')
 
-
 # rota publica para a pagina principal
 @app.route('/')
 def root():
