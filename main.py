@@ -1,5 +1,9 @@
 from flask import Flask
+
+# importar blueprints
 from routes.user import user_bp
+from routes.auth import auth_bp
+
 
 app = Flask(__name__)
 
@@ -9,6 +13,8 @@ def root():
 
 # Registrar o blueprint do usuário
 app.register_blueprint(user_bp, url_prefix='/user')
+# Registrar o blueprint de autenticação
+app.register_blueprint(auth_bp, url_prefix='/auth')
 
 # rodar servidor
 if __name__ == '__main__':
