@@ -10,12 +10,13 @@ def root():
     <h1>Pagina do Usuario</h1>
     '''
 
+# rota privada para a pagina de configurações do usuário
 @user_bp.route('/settings')
 def settings():
     return '''
     <h1>Pagina de Configurações do Usuario</h1>
     '''
-
+# rota privada para a pagina de dashboard do usuário
 @user_bp.route('/dashboard')
 def dashboard():
     name = session.get('username')
@@ -29,8 +30,6 @@ def check_authentication():
     if not token:
         return redirect(url_for('auth.login'))
     
-
-
 
 
 
